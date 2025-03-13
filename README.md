@@ -1,0 +1,2 @@
+# rhstatic
+My static website
