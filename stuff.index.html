@@ -1,0 +1,65 @@
+<span class="title-en">RumyHumy</span>
+<span class="title-ru">РумуХуму</span>
+<style>
+	div { 
+		all: unset;
+	}
+	#home-splash {
+		font-style: italic;
+		text-align: center;
+		color: var(--col-se);
+	}
+	.page-content {
+		all: unset;
+		width: 100%;
+	}
+</style>
+<p id="home-splash"></p>
+<div class="page-nav-list">
+	<a href="/about">
+		<span class="lang-en">🧐<br>About</span>
+		<span class="lang-ru">🧐<br>Что это?</span>
+	</a>
+	<a href="/calc">
+		<span class="lang-en">🧮<br>Calculators</span>
+		<span class="lang-ru">🧮<br>Калькуляторы</span>
+	</a>
+	<!--<a href="/art">
+		<span class="lang-en">🎨<br>Art</span>
+		<span class="lang-ru">🎨<br>Творчество</span>
+	</a>-->
+	<a href="/music">
+		<span class="lang-en">🎶<br>Music</span>
+		<span class="lang-ru">🎶<br>Музыка</span>
+	</a>
+	<a id="random-page" href="#">
+		<span class="lang-en">❓<br>Random page</span>
+		<span class="lang-ru">❓<br>Случайная страница</span>
+	</a>
+</div>
+<script>
+	var pages = null;
+	var splashes = null;
+	var page = null;
+	var splash = null;
+	function getRandomInt(max) {
+		return Math.floor(Math.random()*max);
+	}
+	async function LoadStaticData() {
+		pages = (await FetchText('/pages.txt')).trim().split('\n');
+		splashes = (await FetchText('/splashes.txt')).trim().split('\n');
+
+		splash = splashes[getRandomInt(splashes.length)];
+		page = pages[getRandomInt(pages.length)];
+
+		document.getElementById("home-splash").innerHTML = splash;
+
+		SetLang();
+	}
+	document.getElementById('random-page').addEventListener('click', async function(event) {
+		event.preventDefault();
+		if (page !== null)
+			window.location.href = page;
+	});
+	LoadStaticData();
+</script>

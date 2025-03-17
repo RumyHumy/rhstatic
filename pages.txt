@@ -1,0 +1,6 @@
+/calc
+/calc/error
+/calc/mna
+/about
+/music
+/programming/school-days
